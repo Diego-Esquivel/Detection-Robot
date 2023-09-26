@@ -1,0 +1,17 @@
+import cv2
+import traitlets
+import ipywidgets.widgets as widgets
+
+class RCamera:
+    camera= width=height=color_image=camera_link=frame = 0
+
+    def __init__(self,width,height):
+        self.width = width
+        self.height = height
+        self.camera = Camera.instance(width=self.width,height=self.height)
+        self.color_image = widgets.Image(format='bgr8',width=self.width*2, height=self.height)
+        self.camera_link = traitlets.dlink((self.camera,'value'),(self.color_image,'value'))
+    
+    def getFrame(self):
+        self.frame = self.color_image.value
+        return self.frame
