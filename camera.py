@@ -1,6 +1,7 @@
 import cv2
 import traitlets
 import ipywidgets.widgets as widgets
+import pandas as pd
 
 class RCamera:
     camera= width=height=color_image=camera_link=frame = 0
@@ -14,4 +15,7 @@ class RCamera:
     
     def getFrame(self):
         self.frame = self.color_image.value
+
         return self.frame
+    def getDisplay(self):
+        return self.color_image

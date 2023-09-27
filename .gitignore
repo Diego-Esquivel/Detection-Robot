@@ -4,3 +4,4 @@ data.csv
 *.pdf
 script.py
 vision.ipynb
+__pycache__/*
