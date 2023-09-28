@@ -11,7 +11,7 @@ class RCamera:
         self.width = width
         self.height = height
         self.camera = Camera.instance(width=self.width,height=self.height)
-        self.color_image = widgets.Image(format='jpeg',width=self.width*2, height=self.height)
+        self.color_image = widgets.Image(format='jpeg',width=self.width, height=self.height)
         self.camera_link = traitlets.dlink((self.camera,'value'),(self.color_image,'value'),transform=bgr8_to_jpeg)
     
     def getFrame(self):
