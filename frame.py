@@ -1,17 +1,18 @@
 import cv2
 import pandas as pd
+from jetbot import *
 class Frame:
     frame = 0
     image = 0
-    def __init__(self,frame,color_lower,color_upper):
-        self.frame = frame.value
+    def __init__(self,camera,color_lower,color_upper):
+        self.frame = camera.camera.value
         self.newmask = 0
         self.status = 0
-        self.image = frame
+        self.image = camera.color_image
 
     
     def setFrame(self,frame,color_lower,color_upper):
-        self.frame = frame.value
+        self.frame = frame
     #######################################################################
         #add gaussian blur. this has yet to improve performace but it came stock
         self.frame=cv2.GaussianBlur(self.frame,(1,1),0)  
@@ -35,7 +36,7 @@ class Frame:
                 #high is y=0; low is y = 255
 
                 cv2.circle(self.frame,(int(self.color_x),int(self.color_y)),int(color_radius),(255,0,255),2)
-                self.color_y += color_radius
+                self.color_y += int(color_radius)
                 self.status = 1
 
                 # Mark the detected color with rectangle
@@ -46,7 +47,7 @@ class Frame:
                 #end mark detected color with rectangle
         else:
             self.status = 0
-        self.image.value = self.frame
+        self.image.value = bgr8_to_jpeg(self.frame)
         # Real-time return of image data for display
 
     #######################################################################
